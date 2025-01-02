@@ -20,7 +20,7 @@ class SignInButton extends StatelessWidget {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         side: BorderSide(
-            color: isActive ? Colors.green : Colors.grey, width: 1.5),
+            color: isActive ? Colors.green : Colors.grey, width: 0.2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

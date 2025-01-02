@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_first_app/app/app.locator.dart';
+import 'package:my_first_app/app/app.router.dart';
+import 'package:my_first_app/ui/views/sign_in_view/sign_in_view_view.dart';
 import 'package:my_first_app/widgets/signinoptionsbutton.dart';
 import 'package:stacked/stacked.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter/gestures.dart'; // For TapGestureRecognizer
+import 'package:flutter/gestures.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'sign_in_options_viewmodel.dart';
 
@@ -24,7 +28,7 @@ class SignInOptionsView extends StackedView<SignInOptionsViewModel> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset("assets/images/logo.png"),
+            Center(child: Image.asset("assets/images/logo.png")),
             const SizedBox(
               height: 20,
             ),
@@ -33,7 +37,7 @@ class SignInOptionsView extends StackedView<SignInOptionsViewModel> {
               style: GoogleFonts.poppins(
                   fontSize: 25, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 75),
             Text(
               "   In publishing and graphic design,\nLorem is a placeholder text commonly",
             ),
@@ -60,6 +64,8 @@ class SignInOptionsView extends StackedView<SignInOptionsViewModel> {
                 isActive: viewModel.currentButtonIndex == 2,
                 onPressed: () {
                   viewModel.updateCurrentButtonIndex(2);
+                  locator<NavigationService>()
+                      .navigateTo(Routes.signInViewView);
                 }),
             const SizedBox(height: 15),
             SignInButton(
@@ -70,12 +76,11 @@ class SignInOptionsView extends StackedView<SignInOptionsViewModel> {
                   viewModel.updateCurrentButtonIndex(3);
                 }),
             const SizedBox(height: 28),
-            // Here is the fixed part for "Don't have an account? Sign up" text
             RichText(
               text: TextSpan(
                 style: GoogleFonts.poppins(
                   fontSize: 14,
-                  color: Colors.black, // Default text color
+                  color: Colors.black,
                 ),
                 children: [
                   TextSpan(
@@ -84,19 +89,13 @@ class SignInOptionsView extends StackedView<SignInOptionsViewModel> {
                   TextSpan(
                     text: "Sign up",
                     style: TextStyle(
-                      color: Colors.green, // Green color for "Sign up"
-                      fontWeight: FontWeight.bold, // Optional: Make it bold
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        // Navigate to the SignUp page
-                        // Uncomment and add your SignUp view here
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => SignUpView(),
-                        //   ),
-                        // );
+                        locator<NavigationService>()
+                            .navigateTo(Routes.signupView);
                       },
                   ),
                 ],

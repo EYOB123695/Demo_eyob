@@ -8,6 +8,7 @@ import 'package:my_first_app/ui/views/sign_in_options/sign_in_options_view.dart'
 import 'package:my_first_app/ui/views/sign_in_view/sign_in_view_view.dart';
 import 'package:my_first_app/ui/views/otp_verification/otp_verification_view.dart';
 import 'package:my_first_app/ui/views/signup/signup_view.dart';
+import 'package:my_first_app/ui/views/screensizecheck/screensizecheck_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -18,6 +19,7 @@ import 'package:my_first_app/ui/views/signup/signup_view.dart';
     MaterialRoute(page: SignInViewView),
     MaterialRoute(page: OtpVerificationView),
     MaterialRoute(page: SignupView),
+    MaterialRoute(page: ScreensizecheckView),
 // @stacked-route
   ],
   dependencies: [

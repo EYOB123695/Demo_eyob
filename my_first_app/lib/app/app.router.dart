@@ -5,11 +5,13 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 import 'package:flutter/material.dart';
 import 'package:my_first_app/ui/views/home/home_view.dart' as _i2;
 import 'package:my_first_app/ui/views/otp_verification/otp_verification_view.dart'
     as _i6;
+import 'package:my_first_app/ui/views/screensizecheck/screensizecheck_view.dart'
+    as _i8;
 import 'package:my_first_app/ui/views/sign_in_options/sign_in_options_view.dart'
     as _i4;
 import 'package:my_first_app/ui/views/sign_in_view/sign_in_view_view.dart'
@@ -17,7 +19,7 @@ import 'package:my_first_app/ui/views/sign_in_view/sign_in_view_view.dart'
 import 'package:my_first_app/ui/views/signup/signup_view.dart' as _i7;
 import 'package:my_first_app/ui/views/startup/startup_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i10;
 
 class Routes {
   static const homeView = '/home-view';
@@ -32,6 +34,8 @@ class Routes {
 
   static const signupView = '/signup-view';
 
+  static const screensizecheckView = '/screensizecheck-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -39,6 +43,7 @@ class Routes {
     signInViewView,
     otpVerificationView,
     signupView,
+    screensizecheckView,
   };
 }
 
@@ -68,23 +73,27 @@ class StackedRouter extends _i1.RouterBase {
       Routes.signupView,
       page: _i7.SignupView,
     ),
+    _i1.RouteDef(
+      Routes.screensizecheckView,
+      page: _i8.ScreensizecheckView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.SignInOptionsView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.SignInOptionsView(),
         settings: data,
       );
@@ -93,20 +102,29 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<SignInViewViewArguments>(
         orElse: () => const SignInViewViewArguments(),
       );
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => _i5.SignInViewView(key: args.key),
         settings: data,
       );
     },
     _i6.OtpVerificationView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.OtpVerificationView(),
         settings: data,
       );
     },
     _i7.SignupView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
-        builder: (context) => _i7.SignupView(),
+      final args = data.getArgs<SignupViewArguments>(
+        orElse: () => const SignupViewArguments(),
+      );
+      return _i9.MaterialPageRoute<dynamic>(
+        builder: (context) => _i7.SignupView(key: args.key),
+        settings: data,
+      );
+    },
+    _i8.ScreensizecheckView: (data) {
+      return _i9.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i8.ScreensizecheckView(),
         settings: data,
       );
     },
@@ -122,7 +140,7 @@ class StackedRouter extends _i1.RouterBase {
 class SignInViewViewArguments {
   const SignInViewViewArguments({this.key});
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   @override
   String toString() {
@@ -141,7 +159,29 @@ class SignInViewViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
+class SignupViewArguments {
+  const SignupViewArguments({this.key});
+
+  final _i9.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant SignupViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i10.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -185,7 +225,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }
 
   Future<dynamic> navigateToSignInViewView({
-    _i8.Key? key,
+    _i9.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -214,14 +254,30 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSignupView([
+  Future<dynamic> navigateToSignupView({
+    _i9.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return navigateTo<dynamic>(Routes.signupView,
+        arguments: SignupViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToScreensizecheckView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.signupView,
+    return navigateTo<dynamic>(Routes.screensizecheckView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -271,7 +327,7 @@ extension NavigatorStateExtension on _i9.NavigationService {
   }
 
   Future<dynamic> replaceWithSignInViewView({
-    _i8.Key? key,
+    _i9.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -300,14 +356,30 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSignupView([
+  Future<dynamic> replaceWithSignupView({
+    _i9.Key? key,
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  }) async {
+    return replaceWith<dynamic>(Routes.signupView,
+        arguments: SignupViewArguments(key: key),
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithScreensizecheckView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.signupView,
+    return replaceWith<dynamic>(Routes.screensizecheckView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

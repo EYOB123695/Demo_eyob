@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import flutter_screenutil
 import 'package:my_first_app/app/app.bottomsheets.dart';
 import 'package:my_first_app/app/app.dialogs.dart';
 import 'package:my_first_app/app/app.locator.dart';
@@ -18,13 +19,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: Routes.signInOptionsView,
-      onGenerateRoute: StackedRouter().onGenerateRoute,
-      navigatorKey: StackedService.navigatorKey,
-      navigatorObservers: [
-        StackedService.routeObserver,
-      ],
+    return ScreenUtilInit(
+      designSize:
+          Size(384, 805), // Set the design size (your original screen size)
+      minTextAdapt: true, // Ensure text is scaled properly
+      builder: (context, child) => MaterialApp(
+        // Use builder parameter correctly
+        initialRoute: Routes.signInOptionsView,
+        onGenerateRoute: StackedRouter().onGenerateRoute,
+        navigatorKey: StackedService.navigatorKey,
+        navigatorObservers: [
+          StackedService.routeObserver,
+        ],
+      ),
     );
   }
 }

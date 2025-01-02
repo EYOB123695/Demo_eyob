@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_first_app/widgets/button.dart';
 import 'package:my_first_app/widgets/signinoptionsbutton.dart';
 import 'package:stacked/stacked.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import ScreenUtil
 
 import 'otp_verification_viewmodel.dart';
 
@@ -24,10 +25,10 @@ class OtpVerificationView extends StackedView<OtpVerificationViewModel> {
             Navigator.pop(context);
           },
         ),
-        title: const Text(
+        title: Text(
           "Verify",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 20.sp, // Use sp for font size
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
@@ -39,13 +40,13 @@ class OtpVerificationView extends StackedView<OtpVerificationViewModel> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 18),
+            SizedBox(height: 18.h), // Use h for height
             Center(child: Image.asset("assets/images/otp.png")),
-            SizedBox(height: 60),
+            SizedBox(height: 60.h),
             Text(
               "Enter OTP",
               style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.bold, fontSize: 30),
+                  fontWeight: FontWeight.bold, fontSize: 30.sp),
             ),
             Text(
               "A 4 digit OTP has been sent to",
@@ -59,15 +60,16 @@ class OtpVerificationView extends StackedView<OtpVerificationViewModel> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 40.h),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
+              padding:
+                  EdgeInsets.symmetric(horizontal: 40.w), // Use w for width
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(4, (index) {
                   return SizedBox(
-                    width: 50,
-                    height: 50,
+                    width: 50.w, // Use w for width
+                    height: 50.h, // Use h for height
                     child: TextField(
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
@@ -76,11 +78,12 @@ class OtpVerificationView extends StackedView<OtpVerificationViewModel> {
                         counterText: "",
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(
+                              8.0.r), // Use r for border radius
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.blue),
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(8.0.r),
                         ),
                       ),
                       onChanged: (value) {
@@ -94,16 +97,16 @@ class OtpVerificationView extends StackedView<OtpVerificationViewModel> {
                 }),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             ButtonOne(
               label: "Next",
               onPressed: () {
                 String otpCode = viewModel.getOtpCode();
               },
-              width: 250,
+              width: 250.w, // Use w for width
             ),
-            const SizedBox(height: 20),
-            Text("Resend  OTP (00:12)"),
+            SizedBox(height: 20.h),
+            Text("Resend OTP (00:12)"),
           ],
         ),
       ),
